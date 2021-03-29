@@ -8,7 +8,11 @@ module.exports = {
       .then((dbModel) => res.json(dbModel))
       .catch((err) => console.error(err));
   },
-//   create: function (req, res) {},
+  create: function (req, res) {
+      db.Book.create(req.body)
+      .then((dbModel) => res.json(dbModel))
+      .catch((err) => console.error(err));
+  },
 //   findById: function (req, res) {},
 //   put: function (req, res) {},
 //   remove: function (req, res) {},
