@@ -9,11 +9,15 @@ module.exports = {
       .catch((err) => console.error(err));
   },
   create: function (req, res) {
-      db.Book.create(req.body)
+    db.Book.create(req.body)
       .then((dbModel) => res.json(dbModel))
       .catch((err) => console.error(err));
   },
-//   findById: function (req, res) {},
-//   put: function (req, res) {},
-//   remove: function (req, res) {},
+  findById: function (req, res) {
+    db.Book.findById(req.params.id)
+      .then((dbModel) => res.json(dbModel))
+      .catch((err) => console.log.error(err));
+  },
+  //   put: function (req, res) {},
+  //   remove: function (req, res) {},
 };
