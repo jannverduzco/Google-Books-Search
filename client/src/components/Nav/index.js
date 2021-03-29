@@ -9,7 +9,7 @@ function Nav() {
     <Row>
       <Col>
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-          <Navbar.Brand className="font-link" href="#home">
+          <Navbar.Brand className="font-link" href="/">
             Search Books
           </Navbar.Brand>
         </Navbar>
@@ -22,7 +22,7 @@ function Nav() {
           variant="dark"
           className="justify-content-end"
         >
-          <Navbar.Brand className="font-link" href="#home">
+          <Navbar.Brand className="font-link" href="/saved">
             Saved Books
           </Navbar.Brand>
         </Navbar>
