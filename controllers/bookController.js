@@ -14,10 +14,18 @@ module.exports = {
       .catch((err) => console.error(err));
   },
   findById: function (req, res) {
-    db.Book.findById(req.params.id)
+    db.Book.findById({ _id: req.params.id })
       .then((dbModel) => res.json(dbModel))
       .catch((err) => console.log.error(err));
   },
-  //   put: function (req, res) {},
-  //   remove: function (req, res) {},
+  update: function (req, res) {
+    db.Book.findByIdAndUpdate({ _id: req.params.id }, req.body)
+      .then((dbModel) => res.json(dbModel))
+      .catch((err) => console.log.error(err));
+  },
+  remove: function (req, res) {
+    db.Book.remove({ _id: req, params, id })
+      .then((dbModel) => res.json(dbModel))
+      .catch((err) => console.log.error(err));
+  },
 };
