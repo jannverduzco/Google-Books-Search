@@ -3,6 +3,7 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const routes = require("./routes");
+require("dotenv").config();
 
 // Port
 const PORT = process.env.PORT || 3001;
@@ -16,8 +17,8 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
-// Routes
-// app.use(routes)
+//Routes
+app.use(routes)
 
 // Connection to Mongo DB
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/googlebooks");
