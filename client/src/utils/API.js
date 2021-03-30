@@ -7,7 +7,7 @@ export default {
   // Gets books from the Google Books API
   getGoogleBooks: function (query) {
     console.log(query);
-    return axios.get(BASEURL + query.search + APIKEY);
+    return axios.get(BASEURL + "title" + APIKEY);
   },
   // Gets all the books in the database
   getAllBooks: function () {
