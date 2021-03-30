@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const db = require("../models");
 
 // Setting connection to mongoosee
-mongoose.connect(process.env.MONGODB.URI || "mongodb://localhost/googlebooks");
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/googlebooks");
 
 const googleBookSeed = [
   {
@@ -30,7 +30,7 @@ const googleBookSeed = [
 
 // Inserting documents with the specified filds into database
 db.Book.remove({})
-  .then(() => db.Book.collection.inserMany(googleBookSeed))
+  .then(() => db.Book.collection.insertMany(googleBookSeed))
   .then((data) => {
     console.log(data.result.n + "inserted");
     process.exit(0);
