@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import API from "../utils/API";
 import Wrapper from "../components/Wrapper";
 import Jumbotron from "../components/Jumbotron";
-import BookList from "../components/BookList";
-import BookListItem from "../components/BookListItem";
 import SearchBtn from "../components/SearchBtn";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Input from "../components/SearchForm";
+import { List, ListItem } from "../components/List";
+import { Link } from "react-router-dom";
+import Image from "react-bootstrap/Image";
 
 function SearchBooks() {
   // Setting component's initial state
@@ -19,7 +19,7 @@ function SearchBooks() {
   // Loading all the books with our API call to set them to books state
   function searchBooks(query) {
     API.getGoogleBooks(query)
-      .then((res) => setBookResults(res.data.item))
+      .then((res) => setBookResults(res.data.items))
       .catch((err) => console.log(err));
   }
 
@@ -55,17 +55,26 @@ function SearchBooks() {
 
           <h1>Search Results</h1>
           {bookResults && bookResults.length ? (
-            <BookList>
+            <List>
               {bookResults.map((book) => (
-                <BookListItem key={book._id}>
-                  <Link to={"/books/" + book._id}>
-                    <strong>
-                      {book.title} by {book.author}
-                    </strong>
-                  </Link>
-                </BookListItem>
+                <ListItem key={book.id}>
+                  <Row>
+                    <Col >
+                      <Link to={book.volumeInfo.infoLink}>
+                        {" "}
+                        {book.volumeInfo.title} by {book.volumeInfo.authors}
+                      </Link>
+                    </Col>
+                    <Col >
+                      <Image
+                        src={book.volumeInfo.imageLinks.thumbnail}
+                        alt="book"
+                      />
+                    </Col>
+                  </Row>
+                </ListItem>
               ))}
-            </BookList>
+            </List>
           ) : (
             <h3>No Results to Display</h3>
           )}
