@@ -5,15 +5,19 @@ const BASEURL = "https://www.googleapis.com/books/v1/volumes?q=";
 
 export default {
   // Gets books from the Google Books API
-  getBooks: function (query) {
+  getGoogleBooks: function (query) {
     return axios.get(BASEURL + query + APIKEY);
   },
   // Gets all the books in the database
   getAllBooks: function () {
     return axios.get("/api/books");
   },
+    // Gets specific book
+    getBook: function (id) {
+      return axios.get("/api/books" + id);
+    },
   // Saves books to the database
-  saveBook: function (saveBooks) {
-    return axios.get("/api/books", saveBooks);
+  saveBook: function (saveBookData) {
+    return axios.get("/api/books", saveBookData);
   },
 };
