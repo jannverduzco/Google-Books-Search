@@ -1,11 +1,19 @@
 // Importing dependencies
 import axios from "axios";
 const APIKEY = process.env.API_KEY;
-const bookSearched = "";
+const BASEURL = "https://www.googleapis.com/books/v1/volumes?q=";
 
 export default {
-  getBooks: function () {
-    return axios.get(
-      "https://www.googleapis.com/books/v1/volumes?q=" + bookSearched + APIKEY);
-  }
+  // Gets books from the Google Books API
+  getBooks: function (query) {
+    return axios.get(BASEURL + query + APIKEY);
+  },
+  // Gets all the books in the database
+  getAllBooks: function () {
+    return axios.get("/api/books");
+  },
+  // Saves books to the database
+  saveBook: function (saveBooks) {
+    return axios.get("/api/books", saveBooks);
+  },
 };

@@ -5,6 +5,7 @@ import React from "react";
     <div className="form-group">
       <input className="form-control" {...props} />
     </div>
+    
   );
  }
 

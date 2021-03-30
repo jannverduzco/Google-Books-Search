@@ -5,7 +5,7 @@ import Wrapper from "../components/Wrapper";
 import Jumbotron from "../components/Jumbotron";
 import BookList from "../components/BookList";
 import BookListItem from "../components/BookListItem";
-
+import SearchBtn from "../components/SearchBtn";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Input from "../components/SearchForm";
@@ -33,6 +33,19 @@ function SearchBooks() {
     setFormObject({ ...formObject, [name]: value });
   }
 
+  // Handling Fomm Submit
+  function handleFormSubmit(event) {
+    event.preventDefault();
+    if (formObject.title) {
+      API.saveBook({
+        title: formObject.title,
+      })
+        .then(res => loadBooks())
+        .catch(err => console.log(err));
+    }
+  };
+
+
   return (
     <Wrapper>
       <Row>
@@ -46,6 +59,12 @@ function SearchBooks() {
               name="title"
               placeholder="Search book..."
             />
+             <SearchBtn
+                disabled={!(formObject.title)}
+                onClick={handleFormSubmit}
+              >
+               Search Book
+              </SearchBtn>
           </form>
 
           <h1>Search Results</h1>
