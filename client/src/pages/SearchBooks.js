@@ -12,26 +12,27 @@ import Input from "../components/SearchForm";
 
 function SearchBooks() {
   // Setting component's initial state
-  const [books, setBooks] = useState([]);
+
+  const [search, setSearch] = useState();
   const [bookResults, setBookResults] = useState({});
 
   // Loading all the books with our API call to set them to books state
   function searchBooks(query) {
     API.getGoogleBooks(query)
-      .then((res) => setBooks(res.data.item))
+      .then((res) => setBookResults(res.data.item))
       .catch((err) => console.log(err));
   }
 
   // Handling input changes
   function handleInputChange(event) {
     const { name, value } = event.target;
-    setBookResults({ [name]: value });
+    setSearch({ [name]: value });
   }
 
   // Handling Fomm Submit
   function handleFormSubmit(event) {
     event.preventDefault();
-    searchBooks();
+    searchBooks(search);
   }
 
   return (
@@ -47,15 +48,15 @@ function SearchBooks() {
               name="title"
               placeholder="Search book..."
             />
-            <SearchBtn disabled={!bookResults.title} onClick={handleFormSubmit}>
+            <SearchBtn disabled={!SearchBooks} onClick={handleFormSubmit}>
               Search Book
             </SearchBtn>
           </form>
 
           <h1>Search Results</h1>
-          {bookResults.length ? (
+          {bookResults && bookResults.length ? (
             <BookList>
-              {books.map((book) => (
+              {bookResults.map((book) => (
                 <BookListItem key={book._id}>
                   <Link to={"/books/" + book._id}>
                     <strong>
