@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import API from "../utils/API";
 import Wrapper from "../components/Wrapper";
 import Jumbotron from "../components/Jumbotron";
+import BookList from "../components/BookList";
+import BookListItem from "../components/BookListItem";
+
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Input from "../components/Form";
+import Input from "../components/SearchForm";
 
 function SearchBooks() {
   // Setting component's initial state
   const [books, setBooks] = useState([]);
-  const [formObject, setformObject] = useState({});
+  const [formObject, setFormObject] = useState({});
 
   // Setting our useEffect to run once when the page renders
   useEffect(() => {
@@ -33,16 +37,33 @@ function SearchBooks() {
     <Wrapper>
       <Row>
         <Col>
-          <Jumbotron>
-            <h1>Search for books</h1>
+          <Jumbotron  className= "jumbotron">
+            <h1>GOOGLE BOOK SEARCH</h1>
           </Jumbotron>
           <form>
             <Input
               onChange={handleInputChange}
               name="title"
-              placeholder="Title (required)"
+              placeholder="Search book..."
             />
           </form>
+
+          <h1>Search Results</h1>
+          {books.length ? (
+            <BookList>
+              {books.map((book) => (
+                <BookListItem key={book._id}>
+                  <Link to={"/books/" + book._id}>
+                    <strong>
+                      {book.title} by {book.author}
+                    </strong>
+                  </Link>
+                </BookListItem>
+              ))}
+            </BookList>
+          ) : (
+            <h3>No Results to Display</h3>
+          )}
         </Col>
       </Row>
     </Wrapper>
