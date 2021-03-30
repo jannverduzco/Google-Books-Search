@@ -15,7 +15,7 @@ function SearchBooks() {
   const [books, setBooks] = useState([]);
   const [bookResults, setBookResults] = useState({});
 
-  // Loading all the books with our API call to set them to books
+  // Loading all the books with our API call to set them to books state
   function loadBooks() {
     API.getAllBooks()
       .then((res) => setBooks(res.data.item))
@@ -59,7 +59,7 @@ function SearchBooks() {
           </form>
 
           <h1>Search Results</h1>
-          {books.length ? (
+          {bookResults.length ? (
             <BookList>
               {books.map((book) => (
                 <BookListItem key={book._id}>
