@@ -16,8 +16,8 @@ function SearchBooks() {
   const [bookResults, setBookResults] = useState({});
 
   // Loading all the books with our API call to set them to books state
-  function loadBooks() {
-    API.getAllBooks()
+  function searchBooks(query) {
+    API.getGoogleBooks(query)
       .then((res) => setBooks(res.data.item))
       .catch((err) => console.log(err));
   }
@@ -25,19 +25,13 @@ function SearchBooks() {
   // Handling input changes
   function handleInputChange(event) {
     const { name, value } = event.target;
-    setBookResults({ ...bookResults, [name]: value });
+    setBookResults({ [name]: value });
   }
 
   // Handling Fomm Submit
   function handleFormSubmit(event) {
     event.preventDefault();
-    if (bookResults.title) {
-      API.saveBook({
-        title: bookResults.title,
-      })
-        .then((res) => loadBooks())
-        .catch((err) => console.log(err));
-    }
+    searchBooks();
   }
 
   return (
